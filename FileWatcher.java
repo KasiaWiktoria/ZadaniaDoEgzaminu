@@ -7,30 +7,45 @@ z klasy java.io.File. Konstruktor obiektu File przyjmuje jako argument napis –
 ścieżkę pliku.
  */
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
-public class FileWatcher {
+public class FileWatcher extends Thread {
 
-    private Thread watek;
     public boolean czyMoznaCzytac;
     private String sciezka;
+    private long interval;
 
-
-    public FileWatcher(String sciezka){
+    public FileWatcher(String sciezka, long interval) {
         this.sciezka = sciezka;
         czyMoznaCzytac = false;
-
+        this.interval = interval;
     }
 
-    public void canRead() throws FileNotFoundException {
+    @Override
+    public void run() {
         try {
-            BufferedReader in = new BufferedReader(new FileReader(sciezka));
-                czyMoznaCzytac = true;
-        }catch(FileNotFoundException e){
-            czyMoznaCzytac = false;
+            File file = new File(sciezka);
+            while (czyMoznaCzytac == false) {
+                Thread.sleep((int) interval);
+                if (file.canRead()) {
+                    this.czyMoznaCzytac = true;
+                    System.out.println("Można czytać\n");
+                }
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Przerwano wątek");
         }
     }
+
+    /*  --------------Test-----------------
+    public static void main(String [] args){
+        String path = "/Users/julia/Desktop/test1.txt";
+        Thread fw = new FileWatcher(path, 30000);
+
+        fw.start();
+    }
+    */
 }
+
+
