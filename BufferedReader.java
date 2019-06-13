@@ -20,11 +20,15 @@ g.add( new Student( n[0], Integer.parseInt(n[1]) );
             String l;
             while((l= r.readLine())!= null){
                 String [] n = l.split("\\s");
-                g.add(new Student(n[0], Integer.parseInt(n[1])));
+                try{
+                    g.add(new Student(n[0], Integer.parseInt(n[1])));
+                }catch(NumberFormatException f){
+                    System.out.println("Nieprawidłowy format. Zczytana wartość nie jest liczbą");
+                }
             }
         }catch(FileNotFoundException e){
-
+               System.out.println("Nie znaleziono pliku.");
         }catch(IOException e){
-
+            e.printStackTrace();
         }
 
