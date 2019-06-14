@@ -6,6 +6,7 @@ Comparable<Kontakt> w celu umożliwienia alfabetycznego sortowania kontaktów.
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Kontakt implements  Comparable<Kontakt>{
@@ -23,7 +24,6 @@ public class Kontakt implements  Comparable<Kontakt>{
     public void  dodajNumer(int numer){
         this.numery.add(numer);
     }
-
     public void  usunNumer(int numer){
         this.numery.remove(numer);
     }
@@ -38,11 +38,16 @@ public class Kontakt implements  Comparable<Kontakt>{
         if(!(o instanceof Kontakt))
             return false;
         Kontakt k = (Kontakt) o;
+
+        int licznik = 0;
         if( imie == k.imie && nazwisko == k.nazwisko)
             for (int i = 0; i <numery.size() ; i++) {
                 if(numery.get(i) == k.numery.get(i));
-                return  true;
+                licznik++;
             }
+        if(licznik == numery.size())
+            return  true;
+
         return false;
     }
 

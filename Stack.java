@@ -9,10 +9,14 @@ import java.util.List;
 
 public class Stack {
 
-    private List<Object> lista;
     private Object[] zawartosc;
     private int rozmiar;
     private int iterator;
+
+    public Stack(int rozmiar){
+        this.rozmiar = rozmiar;
+        this.zawartosc = new Object [rozmiar];
+    }
 
     public void push(Object x){
         this.zawartosc[this.iterator++] = x;
