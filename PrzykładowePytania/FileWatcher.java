@@ -3,7 +3,7 @@ import java.util.*;
 
 public class FileWatcher extends Thread {
     private String path;
-    private boolean foundFile;
+    public boolean foundFile;
 
     public FileWatcher(String path){
         this.path = path;
