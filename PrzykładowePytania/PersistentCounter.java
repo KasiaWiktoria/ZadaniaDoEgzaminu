@@ -1,5 +1,5 @@
 public class PersistentCounter extends Thread {
-    private long counter = 0;
+    private volatile long counter = 0;
     private long interval;
 
     public PersistentCounter(long counter, long interval){
